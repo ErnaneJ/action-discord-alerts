@@ -16332,15 +16332,15 @@ const axios = __nccwpck_require__(8757);
 
 const STATUS_OPTIONS = {
   success: {
-    status: 'Success',
+    status: '🟢 Successful workflow',
     color: 0x28A745
   },
   failure: {
-    status: 'Failure',
+    status: '🔴 Failed workflow',
     color: 0xCB2431
   },
   cancelled: {
-    status: 'Cancelled',
+    status: '🟡 Canceled workflow',
     color: 0xDBAB09
   }
 }
@@ -16349,7 +16349,6 @@ function getInputs() {
   return {
     webhook:      core.getInput('webhook', {required: false}),
     status:       core.getInput('status', {required: false}).toLowerCase(),
-    job:          core.getInput('job', {required: false}),
     content:      core.getInput('content', {required: false}),
     title:        core.getInput('title', {required: false}),
     description:  core.getInput('description', {required: false}),
@@ -16367,35 +16366,27 @@ function getInputs() {
 function getDiscordPayload(inputs) {
   const ctx = github.context
   const { owner, repo } = ctx.repo
-  const { eventName, ref, workflow, actor, payload, serverUrl, runId } = ctx
+  const { ref, workflow, actor, payload, serverUrl, runId } = ctx
   const repoURL = `${serverUrl}/${owner}/${repo}`
   const workflowURL = `${repoURL}/actions/runs/${runId}`
 
-  const eventFieldTitle = `Event - ${eventName}`
-  const eventDetail = `${payload.head_commit.message}` // push
+  const eventDetail = `${payload.head_commit.message}`
   const [ refs, head, branch ] = ref.split('/')
 
   let embed = {
     color: inputs.color || STATUS_OPTIONS[inputs.status].color,
-    footer: {
-      text: actor,
-      icon_url: `https://github.com/${actor}.png?size=32`,
-    },
-    thumbnail: {
-      url: 'https://github.com/github.png',
-    }
+    footer: { text: actor, icon_url: `https://github.com/${actor}.png?size=32` },
+    thumbnail: { url: 'https://github.com/github.png' }
   }
 
   if (inputs.timestamp) {
     embed.timestamp = (new Date()).toISOString()
   }
 
-  embed.title = `${STATUS_OPTIONS[inputs.status].status}: ${eventFieldTitle}`
+  embed.title = `${STATUS_OPTIONS[inputs.status].status}: `
   
   if (inputs.image) {
-    embed.image = {
-      url: inputs.image
-    }
+    embed.image = { url: inputs.image }
   }
 
   if (inputs.description) {
@@ -16416,11 +16407,7 @@ function getDiscordPayload(inputs) {
         value: `[${branch}](${repoURL}/tree/${branch})`,
         inline: true
       },
-      {
-        name: '',
-        value: ``,
-        inline: false
-      },
+      { name: '', value: ``, inline: false },
       {
         name: 'Commit',
         value: `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url})`,
@@ -16428,15 +16415,15 @@ function getDiscordPayload(inputs) {
       },
       {
         name: 'Workflow',
-        value: `[${workflow}#${runId}](${repoURL}/actions/runs/)`,
+        value: `[${workflow}#${runId}](${workflowURL})`,
         inline: true
       }
     ]
   }
 
   let discord_payload = {
-      // embeds: [fitEmbed(embed)]
-      embeds: [embed]
+    // embeds: [fitEmbed(embed)]
+    embeds: [embed]
   }
 
   if (inputs.username) {

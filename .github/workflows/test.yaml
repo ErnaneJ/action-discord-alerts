@@ -1,6 +1,6 @@
 name: Use
 
-on: [**]
+on: [workflow_dispatch, push]
 
 jobs:
   example:

@@ -21,30 +21,30 @@ jobs:
           username: ${{ github.actor }}  
           avatar_url: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg
 
-      - name: success
-          uses: ./
-          with:
-            webhook: https://discord.com/api/webhooks/1103803475315392632/4XIWYHt4nnOox2Hj4u_ySxDbr_ynDEdHLwOT4RB5ASM85N7ffI6Vx_S14mGCRuEOowyl     
-            status: "Failure"      
-            job:    ${{ vars.GITHUB_JOB }}      
-            content: "Test content"     
-            title:  "Test title"      
-            description: "test description"
-            image: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg            
-            url:  https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg       
-            username: ${{ github.actor }}  
-            avatar_url: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg
+      - name: Failure
+        uses: ./
+        with:
+          webhook: https://discord.com/api/webhooks/1103803475315392632/4XIWYHt4nnOox2Hj4u_ySxDbr_ynDEdHLwOT4RB5ASM85N7ffI6Vx_S14mGCRuEOowyl     
+          status: "Failure"      
+          job:    ${{ vars.GITHUB_JOB }}      
+          content: "Test content"     
+          title:  "Test title"      
+          description: "test description"
+          image: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg            
+          url:  https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg       
+          username: ${{ github.actor }}  
+          avatar_url: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg
 
-        - name: success
-          uses: ./
-          with:
-            webhook: https://discord.com/api/webhooks/1103803475315392632/4XIWYHt4nnOox2Hj4u_ySxDbr_ynDEdHLwOT4RB5ASM85N7ffI6Vx_S14mGCRuEOowyl     
-            status: "Cancelled"      
-            job:    ${{ vars.GITHUB_JOB }}      
-            content: "Test content"     
-            title:  "Test title"      
-            description: "test description"
-            image: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg            
-            url:  https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg       
-            username: ${{ github.actor }}  
-            avatar_url: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg
+      - name: Cancelled
+        uses: ./
+        with:
+          webhook: https://discord.com/api/webhooks/1103803475315392632/4XIWYHt4nnOox2Hj4u_ySxDbr_ynDEdHLwOT4RB5ASM85N7ffI6Vx_S14mGCRuEOowyl     
+          status: "Cancelled"      
+          job:    ${{ vars.GITHUB_JOB }}      
+          content: "Test content"     
+          title:  "Test title"      
+          description: "test description"
+          image: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg            
+          url:  https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg       
+          username: ${{ github.actor }}  
+          avatar_url: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg

@@ -18,11 +18,11 @@ jobs:
           job:    ${{ vars.GITHUB_JOB }}      
           content: "Test content"     
           title:  "Test title"      
-          description: "test description"
-          image: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg            
+          description: "test description"           
           url:  https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg       
           username: ${{ github.actor }}  
           avatar_url: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg
+          timestamp: false
 
       - name: Failure
         uses: ErnaneJ/action-discord-alerts@main
@@ -37,6 +37,7 @@ jobs:
           url:  https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg       
           username: ${{ github.actor }}  
           avatar_url: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg
+          full_title: false
 
       - name: Cancelled
         uses: ErnaneJ/action-discord-alerts@main
@@ -46,8 +47,8 @@ jobs:
           job:    ${{ vars.GITHUB_JOB }}      
           content: "Test content"     
           title:  "Test title"      
-          description: "test description"
-          image: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg            
+          description: "test description"          
           url:  https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg       
           username: ${{ github.actor }}  
           avatar_url: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg
+          event_info: false

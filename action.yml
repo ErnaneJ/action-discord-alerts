@@ -38,26 +38,18 @@ inputs:
   avatar_url:
     description: "Overrides Discord webhook avatar url"
     required: false
-  nofail:
-    description: "This action won't make workflow failed by default."
-    required: false
-    default: "true"
-  nocontext:
+  event_info:
     description: "Suppress GitHub context fields"
     required: false
-    default: "false"
-  noprefix:
+    default: true
+  full_title:
     description: "Avoid appending job status to title"
     required: false
-    default: "false"
-  nodetail:
-    description: "Suppress detailed embed fields"
-    required: false
-    default: "false"
-  notimestamp:
+    default: true
+  timestamp:
     description: "Avoid appending timestamp"
     required: false
-    default: "false"
+    default: true
 runs:
   using: 'node16'
   main: 'dist/index.js'

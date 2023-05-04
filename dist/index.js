@@ -16358,11 +16358,9 @@ function getInputs() {
     url:          core.getInput('url', {required: false}),
     username:     core.getInput('username', {required: false}),
     avatar_url:   core.getInput('avatar_url', {required: false}),
-    nofail:       core.getInput('nofail', {required: false}),
-    nocontext:    core.getInput('nocontext', {required: false}),
-    noprefix:     core.getInput('noprefix', {required: false}),
-    nodetail:     core.getInput('nodetail', {required: false}),
-    notimestamp:  core.getInput('notimestamp', {required: false})
+    event_info:   core.getInput('event_info', {required: false}),
+    full_title:   core.getInput('full_title', {required: false}),
+    timestamp:  core.getInput('timestamp', {required: false})
   }
 }
 
@@ -16380,7 +16378,7 @@ function getDiscordPayload(inputs) {
     color: inputs.color || STATUS_OPTIONS[inputs.status].color
   }
 
-  if (!inputs.notimestamp) {
+  if (inputs.timestamp) {
     embed.timestamp = (new Date()).toISOString()
   }
 
@@ -16398,7 +16396,7 @@ function getDiscordPayload(inputs) {
     }
   }
 
-  if (!inputs.noprefix) {
+  if (!inputs.full_title) {
     embed.title = STATUS_OPTIONS[inputs.status].status + (embed.title ? `: ${embed.title}` : '')
   }
 
@@ -16406,7 +16404,7 @@ function getDiscordPayload(inputs) {
     embed.description = inputs.description
   }
 
-  if (!inputs.nocontext) {
+  if (inputs.event_info) {
     embed.fields = [
       {
         name: 'Repository',

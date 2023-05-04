@@ -45,21 +45,20 @@ function getDiscordPayload(inputs) {
 
   const eventFieldTitle = `Event - ${eventName}`
   const eventDetail = `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url}) - ${payload.head_commit.message}` // push
+  const { refs, head, branch } = ref.split('/')
 
   let embed = {
-    author: {
-      name: 'Some name',
-      icon_url: 'https://i.imgur.com/AfFp7pu.png',
-      url: 'https://discord.js.org',
-    },
-    thumbnail: {
-      url: 'https://i.imgur.com/AfFp7pu.png',
-    },
     color: inputs.color || STATUS_OPTIONS[inputs.status].color,
     footer: {
       text: actor,
       icon_url: `https://github.com/${actor}.png?size=32`,
     },
+  }
+
+  if (inputs.thumbnail) {
+    embed.thumbnail = {
+      url: 'https://github.com/github.png?size=32',
+    }
   }
 
   if (inputs.timestamp) {
@@ -68,10 +67,8 @@ function getDiscordPayload(inputs) {
 
   if (inputs.title) {
     embed.title = inputs.title
-  }
-
-  if (inputs.url) {
-    embed.url = inputs.url
+  }else{
+    embed.title = STATUS_OPTIONS[inputs.status].status + eventFieldTitle
   }
 
   if (inputs.image) {
@@ -80,12 +77,10 @@ function getDiscordPayload(inputs) {
     }
   }
 
-  if (!inputs.full_title) {
-    embed.title = STATUS_OPTIONS[inputs.status].status + (embed.title ? `: ${embed.title}` : '')
-  }
-
   if (inputs.description) {
     embed.description = inputs.description
+  }else{
+    embed.description = eventDetail
   }
 
   if (inputs.event_info) {
@@ -97,22 +92,17 @@ function getDiscordPayload(inputs) {
       },
       {
         name: 'Ref',
-        value: ref,
+        value: `[${ref}](${repoURL}/tree/${branch})`,
         inline: true
       },
       {
-        name: eventFieldTitle,
-        value: eventDetail,
-        inline: false
-      },
-      {
-        name: 'Triggered by',
-        value: actor,
+        name: 'Job',
+        value: `[${runId}](${workflowURL})`,
         inline: true
       },
       {
         name: 'Workflow',
-        value: `[${workflow}](${workflowURL})`,
+        value: `[${workflow}](${repoURL}/actions/runs/)`,
         inline: true
       }
     ]
@@ -124,14 +114,13 @@ function getDiscordPayload(inputs) {
   }
 
   if (inputs.username) {
-      discord_payload.username = inputs.username
+    discord_payload.username = inputs.username
   }
   if (inputs.avatar_url) {
-      discord_payload.avatar_url = inputs.avatar_url
+    discord_payload.avatar_url = inputs.avatar_url
   }
   if (inputs.content) {
-      // discord_payload.content = fitContent(inputs.content)
-      discord_payload.content = inputs.content
+    discord_payload.content = inputs.content
   }
 
   return discord_payload

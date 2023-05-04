@@ -4,7 +4,7 @@ author: "ErnaneJ"
 
 inputs:
   webhook:
-    description: "Discord webhook endpoint. If not set, env.DISCORD_WEBHOOK will be used."
+    description: "Discord webhook endpoint."
     required: false
   status:
     description: "Job status. Should be bound to job.status. Default to success."

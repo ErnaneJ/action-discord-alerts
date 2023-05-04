@@ -16372,10 +16372,22 @@ function getDiscordPayload(inputs) {
   const workflowURL = `${repoURL}/actions/runs/${runId}`
 
   const eventFieldTitle = `Event - ${eventName}`
-  const eventDetail = `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url}) ${payload.head_commit.message}` // push
+  const eventDetail = `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url}) - ${payload.head_commit.message}` // push
 
   let embed = {
-    color: inputs.color || STATUS_OPTIONS[inputs.status].color
+    author: {
+      name: 'Some name',
+      icon_url: 'https://i.imgur.com/AfFp7pu.png',
+      url: 'https://discord.js.org',
+    },
+    thumbnail: {
+      url: 'https://i.imgur.com/AfFp7pu.png',
+    },
+    color: inputs.color || STATUS_OPTIONS[inputs.status].color,
+    footer: {
+      text: actor,
+      icon_url: `https://github.com/${actor}.png?size=32`,
+    },
   }
 
   if (inputs.timestamp) {

@@ -4,15 +4,15 @@ const axios = require('axios');
 
 const STATUS_OPTIONS = {
   success: {
-    status: 'Successful action run',
+    status: 'Successful action run 🎉',
     color: 0x28A745
   },
   failure: {
-    status: 'Failed action run',
+    status: 'Failed action run 🛑',
     color: 0xCB2431
   },
   cancelled: {
-    status: 'Canceled action run',
+    status: 'Canceled action run ⚠️',
     color: 0xDBAB09
   }
 }
@@ -55,7 +55,7 @@ function getDiscordPayload(inputs) {
     embed.timestamp = (new Date()).toISOString()
   }
 
-  embed.title = `${STATUS_OPTIONS[inputs.status].status}: `
+  embed.title = `${STATUS_OPTIONS[inputs.status].status}`
   
   if (inputs.image) {
     embed.image = { url: inputs.image }

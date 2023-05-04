@@ -4,15 +4,15 @@ const axios = require('axios');
 
 const STATUS_OPTIONS = {
   success: {
-    status: 'Successful action run 🎉',
+    status: 'Successful action run',
     color: 0x28A745
   },
   failure: {
-    status: 'Failed action run 🛑',
+    status: 'Failed action run',
     color: 0xCB2431
   },
   cancelled: {
-    status: 'Canceled action run ⚠️',
+    status: 'Canceled action run',
     color: 0xDBAB09
   }
 }
@@ -47,7 +47,7 @@ function getDiscordPayload(inputs) {
 
   let embed = {
     color: inputs.color || STATUS_OPTIONS[inputs.status].color,
-    footer: { text: actor, icon_url: `https://github.com/${actor}.png?size=32` },
+    footer: { value: `[${actor}](https://github.com/${actor}`, icon_url: `https://github.com/${actor}.png?size=32` },
     thumbnail: { url: 'https://github.com/github.png' }
   }
 

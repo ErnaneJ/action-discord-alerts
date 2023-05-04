@@ -44,8 +44,8 @@ function getDiscordPayload(inputs) {
   const workflowURL = `${repoURL}/actions/runs/${runId}`
 
   const eventFieldTitle = `Event - ${eventName}`
-  const eventDetail = `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url}) - ${payload.head_commit.message}` // push
-  const { refs, head, branch } = ref.split('/')
+  const eventDetail = `${payload.head_commit.message}` // push
+  const [ refs, head, branch ] = ref.split('/')
 
   let embed = {
     color: inputs.color || STATUS_OPTIONS[inputs.status].color,
@@ -88,8 +88,8 @@ function getDiscordPayload(inputs) {
         inline: true
       },
       {
-        name: 'Ref',
-        value: `[${ref}](${repoURL}/tree/${branch})`,
+        name: 'Branch',
+        value: `[${branch}](${repoURL}/tree/${branch})`,
         inline: true
       },
       {
@@ -98,13 +98,13 @@ function getDiscordPayload(inputs) {
         inline: false
       },
       {
-        name: 'Job',
-        value: `[${runId}](${workflowURL})`,
+        name: 'Commit',
+        value: `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url})`,
         inline: true
       },
       {
         name: 'Workflow',
-        value: `[${workflow}](${repoURL}/actions/runs/)`,
+        value: `[${workflow}#${runId}](${repoURL}/actions/runs/)`,
         inline: true
       }
     ]

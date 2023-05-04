@@ -16370,7 +16370,7 @@ function getDiscordPayload(inputs) {
   const repoURL = `${serverUrl}/${owner}/${repo}`
   const workflowURL = `${repoURL}/actions/runs/${runId}`
 
-  const eventDetail = `${payload.head_commit.message} - [${payload.head_commit.author.name}](https://github.com/${actor}) authored & committed`
+  const eventDetail = `[${payload.head_commit.author.name}](https://github.com/${actor}) authored & committed: "${payload.head_commit.message}"`
   const [ refs, head, branch ] = ref.split('/')
 
   let embed = {

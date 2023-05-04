@@ -47,7 +47,7 @@ function getDiscordPayload(inputs) {
 
   let embed = {
     color: inputs.color || STATUS_OPTIONS[inputs.status].color,
-    footer: { value: `[${actor}](https://github.com/${actor}`, icon_url: `https://github.com/${actor}.png?size=32` },
+    footer: { text: `Triggered by ${actor}`, icon_url: `https://github.com/${actor}.png?size=32` },
     thumbnail: { url: 'https://github.com/github.png' }
   }
 

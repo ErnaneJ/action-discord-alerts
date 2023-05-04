@@ -16330,6 +16330,21 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const axios = __nccwpck_require__(8757);
 
+const STATUS_OPTIONS = {
+  success: {
+    status: 'Success',
+    color: 0x28A745
+  },
+  failure: {
+    status: 'Failure',
+    color: 0xCB2431
+  },
+  cancelled: {
+    status: 'Cancelled',
+    color: 0xDBAB09
+  }
+}
+
 function getInputs() {
   return {
     webhook:      core.getInput('webhook', {required: false}),
@@ -16362,7 +16377,7 @@ function getDiscordPayload(inputs) {
   const eventDetail = `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url}) ${payload.head_commit.message}` // push
 
   let embed = {
-    color: inputs.color || statusOpts[inputs.status].color
+    color: inputs.color || STATUS_OPTIONS[inputs.status].color
   }
 
   if (!inputs.notimestamp) {
@@ -16384,7 +16399,7 @@ function getDiscordPayload(inputs) {
   }
 
   if (!inputs.noprefix) {
-    embed.title = statusOpts[inputs.status].status + (embed.title ? `: ${embed.title}` : '')
+    embed.title = STATUS_OPTIONS[inputs.status].status + (embed.title ? `: ${embed.title}` : '')
   }
 
   if (inputs.description) {

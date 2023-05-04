@@ -31,7 +31,7 @@ function getDiscordPayload(inputs) {
   const workflowURL = `${repoURL}/actions/runs/${runId}`
 
   const eventFieldTitle = `Event - ${eventName}`
-  const eventDetail = formatEvent(eventName, payload)
+  const eventDetail = `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url}) ${payload.head_commit.message}` // push
 
   let embed = {
     color: inputs.color || statusOpts[inputs.status].color

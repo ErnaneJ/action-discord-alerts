@@ -1,0 +1,31 @@
+{
+  "name": "action-discord-alerts",
+  "version": "1.0.0",
+  "description": "Action for discord alerts",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build index.js -o dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErnaneJ/action-discord-alerts.git"
+  },
+  "keywords": [
+    "action",
+    "discord",
+    "alerts"
+  ],
+  "author": "Ernane Ferreira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ErnaneJ/action-discord-alerts/issues"
+  },
+  "homepage": "https://github.com/ErnaneJ/action-discord-alerts#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "@vercel/ncc": "^0.36.1",
+    "axios": "^1.4.0"
+  }
+}

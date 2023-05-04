@@ -16332,15 +16332,15 @@ const axios = __nccwpck_require__(8757);
 
 const STATUS_OPTIONS = {
   success: {
-    status: '🟢 Successful workflow',
+    status: 'Successful action run',
     color: 0x28A745
   },
   failure: {
-    status: '🔴 Failed workflow',
+    status: 'Failed action run',
     color: 0xCB2431
   },
   cancelled: {
-    status: '🟡 Canceled workflow',
+    status: 'Canceled action run',
     color: 0xDBAB09
   }
 }
@@ -16397,6 +16397,7 @@ function getDiscordPayload(inputs) {
 
   if (inputs.event_info) {
     embed.fields = [
+      { name: '', value: ``, inline: false },
       {
         name: 'Repository',
         value: `[${owner}/${repo}](${repoURL})`,
@@ -16417,7 +16418,8 @@ function getDiscordPayload(inputs) {
         name: 'Workflow',
         value: `[${workflow}#${runId}](${workflowURL})`,
         inline: true
-      }
+      },
+      { name: '', value: ``, inline: false },
     ]
   }
 

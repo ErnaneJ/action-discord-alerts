@@ -16465,8 +16465,8 @@ async function sendMessage(webhook, payload) {
 
 const main = async () => {
   const inputs = getInputs();
-  core.info(inputs)
-  core.info(STATUS_OPTIONS)
+  core.info(JSON.stringify(inputs))
+  core.info(JSON.stringify(STATUS_OPTIONS))
   const payload = getDiscordPayload(inputs);
 
   await sendMessage(inputs.webhook.trim(), payload)

@@ -16381,11 +16381,8 @@ function getDiscordPayload(inputs) {
       text: actor,
       icon_url: `https://github.com/${actor}.png?size=32`,
     },
-  }
-
-  if (inputs.thumbnail) {
-    embed.thumbnail = {
-      url: 'https://github.com/github.png?size=32',
+    thumbnail: {
+      url: 'https://github.com/github.png',
     }
   }
 
@@ -16396,7 +16393,7 @@ function getDiscordPayload(inputs) {
   if (inputs.title) {
     embed.title = inputs.title
   }else{
-    embed.title = STATUS_OPTIONS[inputs.status].status + eventFieldTitle
+    embed.title = `${STATUS_OPTIONS[inputs.status].status}: ${eventFieldTitle}`
   }
 
   if (inputs.image) {
@@ -16422,6 +16419,11 @@ function getDiscordPayload(inputs) {
         name: 'Ref',
         value: `[${ref}](${repoURL}/tree/${branch})`,
         inline: true
+      },
+      {
+        name: '',
+        value: ``,
+        inline: false
       },
       {
         name: 'Job',

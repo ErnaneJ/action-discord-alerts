@@ -16390,12 +16390,8 @@ function getDiscordPayload(inputs) {
     embed.timestamp = (new Date()).toISOString()
   }
 
-  if (inputs.title) {
-    embed.title = inputs.title
-  }else{
-    embed.title = `${STATUS_OPTIONS[inputs.status].status}: ${eventFieldTitle}`
-  }
-
+  embed.title = `${STATUS_OPTIONS[inputs.status].status}: ${eventFieldTitle}`
+  
   if (inputs.image) {
     embed.image = {
       url: inputs.image

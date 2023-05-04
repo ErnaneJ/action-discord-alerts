@@ -20,7 +20,7 @@ const STATUS_OPTIONS = {
 function getInputs() {
   return {
     webhook:      core.getInput('webhook', {required: false}),
-    status:       core.getInput('status', {required: false}),
+    status:       core.getInput('status', {required: false}).toLowerCase(),
     job:          core.getInput('job', {required: false}),
     content:      core.getInput('content', {required: false}),
     title:        core.getInput('title', {required: false}),

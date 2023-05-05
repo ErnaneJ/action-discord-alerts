@@ -17695,7 +17695,7 @@ function getDiscordPayload(inputs) {
 }
 
 function log(type, message){
-  if(process.env.JEST_ENV === 'test') return;
+  if(process.env.SILENT) return;
   return {
     error: (message) => core.setFailed(message),
     info: (message) => core.info(message),

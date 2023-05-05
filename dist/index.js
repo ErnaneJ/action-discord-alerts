@@ -16364,7 +16364,7 @@ const github = __nccwpck_require__(5438);
 const axios = __nccwpck_require__(8757);
 
 function getInputs() {
-  return {
+  const inputs = {
     webhook:      core.getInput('webhook', {required: false}),
     status:       core.getInput('status', {required: false}).toLowerCase(),
     content:      core.getInput('content', {required: false}),
@@ -16377,17 +16377,21 @@ function getInputs() {
     event_info:   core.getInput('event_info', {required: false}),
     timestamp:    core.getInput('timestamp', {required: false})
   }
+
+  log('debug', `${JSON.stringify(inputs)}`);
+
+  return inputs;
 }
 
 function getDiscordPayload(inputs) {
-  const githubContext = github.context
-  const { owner, repo } = githubContext.repo
-  const { ref, workflow, actor, payload, serverUrl, runId } = githubContext
-  const repoURL = `${serverUrl}/${owner}/${repo}`
-  const workflowURL = `${repoURL}/actions/runs/${runId}`
+  const githubContext = github.context;
+  const { owner, repo } = githubContext.repo;
+  const { ref, workflow, actor, payload, serverUrl, runId } = githubContext;
+  const repoURL = `${serverUrl}/${owner}/${repo}`;
+  const workflowURL = `${repoURL}/actions/runs/${runId}`;
 
-  const eventDetail = `[${payload.head_commit.author.name}](https://github.com/${actor}) authored & committed - ${payload.head_commit.message}`
-  const [ refs, head, branch ] = ref.split('/')
+  const eventDetail = `[${payload.head_commit.author.name}](https://github.com/${actor}) authored & committed - ${payload.head_commit.message}`;
+  const [ refs, head, branch ] = ref.split('/');
 
   let embed = {
     color: inputs.color || STATUS_OPTIONS[inputs.status].color,
@@ -16396,19 +16400,19 @@ function getDiscordPayload(inputs) {
   }
 
   if (inputs.title) {
-    embed.title = inputs.title
+    embed.title = inputs.title;
   }else{
-    embed.title = `${STATUS_OPTIONS[inputs.status].status}`
+    embed.title = `${STATUS_OPTIONS[inputs.status].status}`;
   }
 
   if (inputs.description) {
-    embed.description = inputs.description
+    embed.description = inputs.description;
   }else{
-    embed.description = eventDetail
+    embed.description = eventDetail;
   }
 
-  if (inputs.timestamp) embed.timestamp = (new Date()).toISOString()
-  if (inputs.image) embed.image = { url: inputs.image }
+  if (inputs.timestamp) embed.timestamp = (new Date()).toISOString();
+  if (inputs.image) embed.image = { url: inputs.image };
 
   if (inputs.event_info) {
     embed.fields = [
@@ -16429,24 +16433,42 @@ function getDiscordPayload(inputs) {
   if (inputs.avatar_url) discord_payload.avatar_url = inputs.avatar_url
   if (inputs.content) discord_payload.content = inputs.content
 
-  return discord_payload
+  log('debug', `${JSON.stringify(discord_payload)}`);
+  
+  return discord_payload;
+}
+
+function log(type, message){
+  return {
+    error: (message) => core.error(message),
+    debug: (message) => core.debug(message),
+    info: (message) => core.info(message),
+    warning: (message) => core.warning(message)
+  }[type](message);
 }
 
 async function sendPayload(webhook, payload) {
   try {
     await axios.post(webhook, payload)
   } catch (error) {
-    core.setFailed(error.message);
+    log('error', error.message);
   }
 }
 ;// CONCATENATED MODULE: ./index.js
 
 
 const main = async () => {
+  log('info', 'Starting Discord Action ✨');
+  log('info', 'Getting inputs..');
   const inputs = getInputs();
+
+  log('info', 'Getting Discord payload..');
   const payload = getDiscordPayload(inputs);
 
+  log('info', 'Sending Discord payload..');
   await sendPayload(inputs.webhook.trim(), payload);
+
+  log('info', 'Discord Action completed successfully 🎉');
 }
 
 main();

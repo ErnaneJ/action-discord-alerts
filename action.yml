@@ -4,52 +4,46 @@ author: "ErnaneJ"
 
 inputs:
   webhook:
-    description: "Discord webhook endpoint."
-    required: false
+    description: "Discord webhook."
+    required: true
   status:
     description: "Job status. Should be bound to job.status. Default to success."
     required: false
     default: ${{ job.status }}
-  job:
-    description: "Deprecated. Job name included in message title. Same as title input."
-    required: false
   content:
-    description: "Content. Shown as an message outside of the embed. See [Mention to user/role](#mention-to-user-role)"
+    description: "Standard message outside the information card. Can be used to mention users."
     required: false
   title:
-    description: "String included in embed title. Overrides job input."
+    description: "For custom title only. By default it is filled with action job status."
     required: false
     default: ${{ github.workflow }}
   description:
-    description: "Description included in message"
+    description: "For custom description only. By default it is filled with author and commit message."
     required: false
   image:
-    description: "Image attached to the message"
+    description: "Url of an Image that will be attached to the information card"
     required: false
   color:
-    description: "Overrides Discord embed color"
-    required: false
-  url:
-    description: "URL to jump when the title is clicked"
+    description: "Overwrite the defined color for the info card highlight. By default this color is set by job status."
     required: false
   username:
-    description: "Overrides Discord webhook username"
+    description: "Overrides Discord webhook username. By default we have Github Action."
     required: false
   avatar_url:
-    description: "Overrides Discord webhook avatar url"
+    description: "Overrides Discord webhook avatar url. By default we have Github image url."
     required: false
   event_info:
-    description: "Suppress GitHub context fields"
-    required: false
-    default: true
-  full_title:
-    description: "Avoid appending job status to title"
+    description: "Decide whether or not to display drill-downs for some information. By default it is shown."
     required: false
     default: true
   timestamp:
-    description: "Avoid appending timestamp"
+    description: "Controls whether to show the timestamp on the info card. Default pos is shown."
     required: false
     default: true
+  verbose:
+    description: "Controls the sampling of some information when the script runs. For example, the payload that is assembled before being sent to discord."
+    required: false
+    default: false
 runs:
   using: 'node16'
   main: 'dist/index.js'

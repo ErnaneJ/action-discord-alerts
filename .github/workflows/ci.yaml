@@ -25,8 +25,5 @@ jobs:
       - name: Action Discord Alert
         uses: ErnaneJ/action-discord-alerts@main
         with:
-          webhook: https://discord.com/api/webhooks/1103803475315392632/4XIWYHt4nnOox2Hj4u_ySxDbr_ynDEdHLwOT4RB5ASM85N7ffI6Vx_S14mGCRuEOowyl     
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}     
           status: ${{ job.status }}
-          username: "Github Action" 
-          avatar_url: https://github.com/github.png
-          timestamp: false

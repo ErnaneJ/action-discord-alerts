@@ -20,17 +20,17 @@ test('MAX_WEBHOOK_LENGTH to equal 2000', () => {
   expect(constants.MAX_WEBHOOK_LENGTH).toBe(2000);
 });
 
-// test('STATUS_OPTIONS success', () => {
-//   expect(constants.STATUS_OPTIONS.status).toBe('Successful action run');
-//   expect(constants.STATUS_OPTIONS.color).toBe('0x28A745');
-// });
+test('STATUS_OPTIONS success', () => {
+  expect(constants.STATUS_OPTIONS.status).toBe('Successful action run');
+  expect(constants.STATUS_OPTIONS.color).toBe('0x28A745');
+});
 
-// test('STATUS_OPTIONS failure', () => {
-//   expect(constants.STATUS_OPTIONS.status).toBe('Failed action run');
-//   expect(constants.STATUS_OPTIONS.color).toBe('0xCB2431');
-// });
+test('STATUS_OPTIONS failure', () => {
+  expect(constants.STATUS_OPTIONS.status).toBe('Failed action run');
+  expect(constants.STATUS_OPTIONS.color).toBe('0xCB2431');
+});
 
-// test('STATUS_OPTIONS cancelled', () => {
-//   expect(constants.STATUS_OPTIONS.status).toBe('Canceled action run');
-//   expect(constants.STATUS_OPTIONS.color).toBe('0xDBAB09');
-// });
+test('STATUS_OPTIONS cancelled', () => {
+  expect(constants.STATUS_OPTIONS.status).toBe('Canceled action run');
+  expect(constants.STATUS_OPTIONS.color).toBe('0xDBAB09');
+});

@@ -1,10 +1,11 @@
-const { getInputs, getDiscordPayload, sendPayload } = require('./lib/utils');
+import { getInputs, getDiscordPayload, sendPayload } from './lib/utils';
 
 const main = async () => {
   const inputs = getInputs();
   const payload = getDiscordPayload(inputs);
 
-  await sendPayload(inputs.webhook.trim(), payload)
+  await sendPayload(inputs.webhook.trim(), payload).
+  teste()
 }
 
 main();

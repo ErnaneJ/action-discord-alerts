@@ -16,7 +16,7 @@ jobs:
           webhook: https://discord.com/api/webhooks/1103803475315392632/4XIWYHt4nnOox2Hj4u_ySxDbr_ynDEdHLwOT4RB5ASM85N7ffI6Vx_S14mGCRuEOowyl     
           status: "Success"      
           job:    ${{ vars.GITHUB_JOB }}      
-          username: "Github Actions" 
+          username: "Github Action" 
           avatar_url: https://github.com/github.png
           timestamp: false
 
@@ -27,7 +27,7 @@ jobs:
           status: "Failure"      
           job:    ${{ vars.GITHUB_JOB }}      
           image: https://i.pinimg.com/originals/28/1a/af/281aaf73c5b37d8be3b0ed20caade1c9.jpg            
-          username: "Github Actions"
+          username: "Github Action"
           avatar_url: https://github.com/github.png
 
       - name: Cancelled
@@ -36,6 +36,6 @@ jobs:
           webhook: https://discord.com/api/webhooks/1103803475315392632/4XIWYHt4nnOox2Hj4u_ySxDbr_ynDEdHLwOT4RB5ASM85N7ffI6Vx_S14mGCRuEOowyl     
           status: "Cancelled"      
           job:    ${{ vars.GITHUB_JOB }}      
-          username: "Github Actions"  
+          username: "Github Action"  
           avatar_url: https://github.com/github.png
           event_info: false

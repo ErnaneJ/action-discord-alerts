@@ -1,0 +1,31 @@
+name: CI
+
+on: [workflow_dispatch, push]
+
+  jest:
+    name: Jest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.13.0
+          cache: 'npm'
+
+      - name: Install node dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Action Discord Alert
+        uses: ErnaneJ/action-discord-alerts@main
+        with:
+          webhook: https://discord.com/api/webhooks/1103803475315392632/4XIWYHt4nnOox2Hj4u_ySxDbr_ynDEdHLwOT4RB5ASM85N7ffI6Vx_S14mGCRuEOowyl     
+          status: ${{ success() && 'success' || (failure() && 'failure' || 'cancelled')  }}
+          username: "Github Action" 
+          avatar_url: https://github.com/github.png
+          timestamp: false

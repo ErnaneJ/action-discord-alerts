@@ -23,6 +23,9 @@ inputs:
   image:
     description: "Url of an Image that will be attached to the information card"
     required: false
+  thumbnail:
+    description: "Url of an thumbnail that will be attached to the information card"
+    required: false
   color:
     description: "Overwrite the defined color for the info card highlight. By default this color is set by job status."
     required: false

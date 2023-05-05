@@ -17,7 +17,7 @@ jobs:
           cache: 'npm'
 
       - name: Install node dependencies
-        run: npm install --legacy-peer-deps
+        run: npm install
 
       - name: Run tests
         run: npm run test

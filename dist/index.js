@@ -16364,7 +16364,7 @@ const github = __nccwpck_require__(5438);
 const axios = __nccwpck_require__(8757);
 
 function getInputs() {
-  const inputs = {
+  return {
     webhook:      core.getInput('webhook', {required: false}),
     status:       core.getInput('status', {required: false}).toLowerCase(),
     content:      core.getInput('content', {required: false}),
@@ -16377,10 +16377,6 @@ function getInputs() {
     event_info:   core.getInput('event_info', {required: false}),
     timestamp:    core.getInput('timestamp', {required: false})
   }
-
-  log('debug', `${JSON.stringify(inputs)}`);
-
-  return inputs;
 }
 
 function getDiscordPayload(inputs) {
@@ -16433,15 +16429,14 @@ function getDiscordPayload(inputs) {
   if (inputs.avatar_url) discord_payload.avatar_url = inputs.avatar_url
   if (inputs.content) discord_payload.content = inputs.content
 
-  log('debug', `${JSON.stringify(discord_payload)}`);
-  
+  log('info', `${JSON.stringify(discord_payload)}`);
+
   return discord_payload;
 }
 
 function log(type, message){
   return {
     error: (message) => core.error(message),
-    debug: (message) => core.debug(message),
     info: (message) => core.info(message),
     warning: (message) => core.warning(message)
   }[type](message);
@@ -16451,7 +16446,11 @@ async function sendPayload(webhook, payload) {
   try {
     await axios.post(webhook, payload)
   } catch (error) {
-    log('error', error.message);
+    if (error.response) {
+      log('error', `Webhook response: ${error.response.status}: ${JSON.stringify(error.response.data)}`)
+    } else {
+      log('error', error)
+    }
   }
 }
 ;// CONCATENATED MODULE: ./index.js

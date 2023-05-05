@@ -23,6 +23,7 @@ jobs:
         run: npm run test
 
       - name: Action Discord Alert
+        if: always()
         uses: ErnaneJ/action-discord-alerts@main
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}     

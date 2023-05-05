@@ -16,7 +16,6 @@ inputs:
   title:
     description: "For custom title only. By default it is filled with action job status."
     required: false
-    default: ${{ github.workflow }}
   description:
     description: "For custom description only. By default it is filled with author and commit message."
     required: false

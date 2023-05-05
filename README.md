@@ -45,7 +45,7 @@ Action aimed at facilitating continuous delivery. You only need a discord webhoo
 | Argument       | Required  | Default               | Description                                                                                                                              |
 |-----------------|-----------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | **webhook**     |  `true`   | -                     | Discord webhook.                                                                                                                         |
-| **status**      |  `false`  | ${{ job.status }}     | Job status. Should be bound to job.status. Default to success.                                                                           |
+| **status**      |  `false`  | `${{ job.status }}`     | Job status. Should be bound to job.status. Default to success.                                                                           |
 | **content**     |  `false`  | -                     | Standard message outside the information card. Can be used to mention users.                                                             |
 | **title**       |  `false`  | -                     | For custom title only. By default it is filled with action job status.                                                                   |
 | **description** |  `false`  | -                     | For custom description only. By default it is filled with author and commit message.                                                     |

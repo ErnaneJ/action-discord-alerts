@@ -1,4 +1,4 @@
-name: Use
+name: Example of Use
 
 on: [workflow_dispatch, push]
 

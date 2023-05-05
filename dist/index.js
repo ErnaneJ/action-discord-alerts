@@ -16446,8 +16446,7 @@ const main = async () => {
   const inputs = getInputs();
   const payload = getDiscordPayload(inputs);
 
-  await sendPayload(inputs.webhook.trim(), payload).
-  teste()
+  await sendPayload(inputs.webhook.trim(), payload);
 }
 
 main();

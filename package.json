@@ -1,6 +1,6 @@
 {
   "name": "action-discord-alerts",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Action for discord alerts",
   "main": "index.js",
   "scripts": {

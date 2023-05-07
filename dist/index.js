@@ -9997,11 +9997,11 @@ function sendPayload(webhook, payload) {
   fetch(webhook, {
     method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'application/json' }
   }).catch(error => {
-    if (error.response) {
-      log('error', `Webhook response: ${error.response.status}: ${JSON.stringify(error.response.data)}`)
-    } else {
-      log('error', error)
-    }
+    let msg = error;
+    
+    if (error.response) msg = `Webhook response: ${error.response.status}: ${JSON.stringify(error.response.data)}`;
+
+    log('error', msg)
   });
 }
 ;// CONCATENATED MODULE: ./index.js

@@ -17628,7 +17628,10 @@ function getDiscordPayload(inputs) {
   const repoURL = `${serverUrl}/${owner}/${repo}`;
   const workflowURL = `${repoURL}/actions/runs/${runId}`;
 
-  const eventDetail = `[${payload.head_commit.author.name}](https://github.com/${actor}) authored & committed - ${payload.head_commit.message}`;
+  const eventDetail = payload.head_commit ? 
+                      `[${payload.head_commit.author.name}](https://github.com/${actor}) authored & committed - ${payload.head_commit.message}` :
+                      `Action manually run by [${payload.head_commit.author.name}](https://github.com/${actor})`;
+
   const [ refs, head, branch ] = ref.split('/');
 
   if(!inputs.status) inputs.status = DEFAULT_VALUES.status;
@@ -17662,11 +17665,11 @@ function getDiscordPayload(inputs) {
   if (inputs.event_info) {
     embed.fields = [
       { name: '', value: '', inline: false },
-      { name: 'Repository', value: `[${owner}/${repo}](${repoURL})`, inline: true },
-      { name: 'Branch', value: `[${branch}](${repoURL}/tree/${branch})`, inline: true },
+      { name: 'Repository', value: `[\`${owner}/${repo}\`](${repoURL})`, inline: true },
+      { name: 'Branch', value: `[\`${branch}\`](${repoURL}/tree/${branch})`, inline: true },
       { name: '', value: '', inline: false },
-      { name: 'Commit', value: `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url})`, inline: true },
-      { name: 'Workflow', value: `[${workflow}#${runId}](${workflowURL})`, inline: true },
+      { name: 'Commit', value: payload.head_commit ? `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url})` : '-', inline: true },
+      { name: 'Workflow', value: `[\`${workflow}#${runId}\`](${workflowURL})`, inline: true },
       { name: '', value: '', inline: false },
     ]
   }

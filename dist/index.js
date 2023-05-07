@@ -17630,7 +17630,7 @@ function getDiscordPayload(inputs) {
 
   const eventDetail = payload.head_commit ? 
                       `[${payload.head_commit.author.name}](https://github.com/${actor}) authored & committed - ${payload.head_commit.message}` :
-                      `Action manually run by [${payload.head_commit.author.name}](https://github.com/${actor})`;
+                      `Action manually run by [${actor}](https://github.com/${actor})`;
 
   const [ refs, head, branch ] = ref.split('/');
 

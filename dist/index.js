@@ -17545,7 +17545,7 @@ const DEFAULT_VALUES = {
   thumbnail: 'https://github.com/github.png'
 }
 
-const INPUTS = ['webhook', 'status', 'content', 'title', 'description', 'image', 'thumbnail', 'color', 'username', 'avatar_url', 'event_info', 'timestamp', 'verbose']
+const INPUTS = ['webhook', 'status', 'content', 'title', 'description', 'image', 'thumbnail', 'color', 'username', 'avatar_url', 'event_info', 'timestamp', 'verbose', 'code_coverage']
 ;// CONCATENATED MODULE: ./lib/validations.js
 
 
@@ -17653,6 +17653,10 @@ function getDiscordPayload(inputs) {
     embed.title = `${STATUS_OPTIONS[inputs.status.toLowerCase()].status}`;
   }
 
+  if (inputs.code_coverage){
+    embed.code_coverage = inputs.code_coverage
+  }
+
   if (inputs.description) {
     embed.description = inputs.description;
   }else{
@@ -17671,6 +17675,7 @@ function getDiscordPayload(inputs) {
       { name: 'Commit', value: payload.head_commit ? `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url})` : '-', inline: true },
       { name: 'Workflow', value: `[\`${workflow}#${runId}\`](${workflowURL})`, inline: true },
       { name: '', value: '', inline: false },
+      { name: 'Code Coverage', value: `${inputs.code_coverage}`, inline: true },
     ]
   }
 

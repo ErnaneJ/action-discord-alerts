@@ -24,7 +24,8 @@ jobs:
 
       - name: Action Discord Alert
         if: always()
-        uses: ErnaneJ/action-discord-alerts@main
+        uses: Thiteago/action-discord-alerts@coverage
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}     
           status: ${{ job.status }}
+          code_coverage: '55%'

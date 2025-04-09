@@ -17725,6 +17725,7 @@ const main = async () => {
   log('info', 'Getting inputs..');
   const inputs = getInputs();
 
+  log('info', inputs)
   log('info', 'Getting Discord payload..');
   const payload = getDiscordPayload(inputs);
 

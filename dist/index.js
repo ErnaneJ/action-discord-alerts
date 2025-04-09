@@ -17545,7 +17545,7 @@ const DEFAULT_VALUES = {
   thumbnail: 'https://github.com/github.png'
 }
 
-const INPUTS = ['webhook', 'status', 'content', 'title', 'description', 'image', 'thumbnail', 'color', 'username', 'avatar_url', 'event_info', 'timestamp', 'verbose']
+const INPUTS = ['webhook', 'status', 'content', 'title', 'description', 'image', 'thumbnail', 'color', 'username', 'avatar_url', 'event_info', 'timestamp', 'verbose', 'code_coverage']
 ;// CONCATENATED MODULE: ./lib/validations.js
 
 
@@ -17624,13 +17624,13 @@ function getInputs() {
 function getDiscordPayload(inputs) {
   const githubContext = github.context;
   const { owner, repo } = githubContext.repo;
-  const { ref, workflow, actor, payload, serverUrl, runId } = githubContext;
+  const { ref, workflow, actor, payload, serverUrl, runId, triggering_actor } = githubContext;
   const repoURL = `${serverUrl}/${owner}/${repo}`;
   const workflowURL = `${repoURL}/actions/runs/${runId}`;
 
   const eventDetail = payload.head_commit ? 
-                      `[${payload.head_commit.author.name}](https://github.com/${actor}) authored & committed - ${payload.head_commit.message}` :
-                      `Action manually run by [${actor}](https://github.com/${actor})`;
+                      `[${payload.head_commit.author.name}](https://github.com/${triggering_actor}) authored & committed - ${payload.head_commit.message}` :
+                      `Action manually run by [${actor}](https://github.com/${triggering_actor})`;
 
   const [ refs, head, branch ] = ref.split('/');
 
@@ -17653,6 +17653,10 @@ function getDiscordPayload(inputs) {
     embed.title = `${STATUS_OPTIONS[inputs.status.toLowerCase()].status}`;
   }
 
+  if (inputs.code_coverage){
+    embed.code_coverage = inputs.code_coverage
+  }
+
   if (inputs.description) {
     embed.description = inputs.description;
   }else{
@@ -17671,6 +17675,7 @@ function getDiscordPayload(inputs) {
       { name: 'Commit', value: payload.head_commit ? `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url})` : '-', inline: true },
       { name: 'Workflow', value: `[\`${workflow}#${runId}\`](${workflowURL})`, inline: true },
       { name: '', value: '', inline: false },
+      { name: 'Code Coverage', value: `${inputs.code_coverage}`, inline: true },
     ]
   }
 
@@ -17725,7 +17730,6 @@ const main = async () => {
   log('info', 'Getting inputs..');
   const inputs = getInputs();
 
-  log('info', inputs)
   log('info', 'Getting Discord payload..');
   const payload = getDiscordPayload(inputs);
 

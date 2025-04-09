@@ -28,4 +28,3 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}     
           status: ${{ job.status }}
-          code_coverage: '55%'

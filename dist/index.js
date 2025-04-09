@@ -38940,8 +38940,9 @@ function getInputs() {
 
 function getDiscordPayload(inputs) {
   const githubContext = github.context;
+  const triggering_actor = github.triggering_actor;
   const { owner, repo } = githubContext.repo;
-  const { ref, workflow, actor, payload, serverUrl, runId, triggering_actor } = githubContext;
+  const { ref, workflow, actor, payload, serverUrl, runId } = githubContext;
   const repoURL = `${serverUrl}/${owner}/${repo}`;
   const workflowURL = `${repoURL}/actions/runs/${runId}`;
 

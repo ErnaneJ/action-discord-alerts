@@ -10,5 +10,6 @@ export const inputs = {
   avatar_url: "https://github.com/github.png",
   event_info: true,
   timestamp: true,
-  verbose: true
+  verbose: true,
+  code_coverage: '100%'
 }

@@ -11,7 +11,7 @@
   <a href="#-contribute">Contribute</a>&nbsp;&nbsp;&nbsp;
 </p>
 
-<br/>
+<br/> 
 
 <p align="center">
   <a href="https://github.com/ErnaneJ/action-discord-alerts/actions/workflows/ci.yaml">

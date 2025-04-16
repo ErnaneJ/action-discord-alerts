@@ -39051,7 +39051,7 @@ function getDiscordPayload(inputs) {
         baseFields.push({ name: '', value: '', inline: false });
       }
   
-      embed.fields = embed.fields ? [...embed.fields, ...baseFields] : baseFields;
+      embed.fields = embed.fields ? [ ...baseFields, ...embed.fields] : baseFields;
   }
 
   let discord_payload = { embeds: [embed] }

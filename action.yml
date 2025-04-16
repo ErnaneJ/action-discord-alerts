@@ -47,7 +47,10 @@ inputs:
     required: false
     default: false
   custom_fields:
-    descript: "Make possible to specify any field do you want"
+    description: "Make possible to specify any field do you want"
+    required: false
+  hide_default_fields:
+    description: "Specify which default fields did you want to hide"
     required: false
 runs:
   using: 'node20'

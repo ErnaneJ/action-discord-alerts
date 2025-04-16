@@ -38862,7 +38862,7 @@ const DEFAULT_VALUES = {
   thumbnail: 'https://github.com/github.png'
 }
 
-const INPUTS = ['webhook', 'status', 'content', 'title', 'description', 'image', 'thumbnail', 'color', 'username', 'avatar_url', 'event_info', 'timestamp', 'verbose', 'code_coverage']
+const INPUTS = ['webhook', 'status', 'content', 'title', 'description', 'image', 'thumbnail', 'color', 'username', 'avatar_url', 'event_info', 'timestamp', 'verbose', 'custom_fields']
 ;// CONCATENATED MODULE: ./lib/validations.js
 
 
@@ -38973,10 +38973,6 @@ function getDiscordPayload(inputs) {
     embed.title = `${STATUS_OPTIONS[inputs.status.toLowerCase()].status}`;
   }
 
-  if (inputs.code_coverage){
-    embed.code_coverage = inputs.code_coverage
-  }
-
   if (inputs.description) {
     embed.description = inputs.description;
   }else{
@@ -38986,17 +38982,28 @@ function getDiscordPayload(inputs) {
   if (inputs.timestamp) embed.timestamp = (new Date()).toISOString();
   if (inputs.image) embed.image = { url: inputs.image };
 
+  if (inputs.custom_fields) {
+    try {
+      const customFields = JSON.parse(inputs.custom_fields);
+      if (customFields && Array.isArray(customFields)) {
+        embed.fields = customFields;
+      }
+    } catch (e) {
+      log('error', `Failed to parse custom_fields: ${e.message}`);
+    }
+  }
+
   if (inputs.event_info) {
-    embed.fields = [
+    const baseFields = [
       { name: '', value: '', inline: false },
       { name: 'Repository', value: `[\`${owner}/${repo}\`](${repoURL})`, inline: true },
       { name: 'Branch', value: `[\`${branch}\`](${repoURL}/tree/${branch})`, inline: true },
       { name: '', value: '', inline: false },
       { name: 'Commit', value: payload.head_commit ? `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url})` : '-', inline: true },
       { name: 'Workflow', value: `[\`${workflow}#${runId}\`](${workflowURL})`, inline: true },
-      { name: '', value: '', inline: false },
-      { name: 'Code Coverage', value: `${inputs.code_coverage}`, inline: true },
-    ]
+    ];
+
+    embed.fields = embed.fields ? [...embed.fields, ...baseFields] : baseFields;
   }
 
   let discord_payload = { embeds: [embed] }

@@ -28,6 +28,7 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}     
           status: ${{ job.status }}
+          hide_default_fields: 'commit'
           custom_fields: |
             [
               {"name": "Test Results", "value": "All tests passed", "inline": true},

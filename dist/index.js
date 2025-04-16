@@ -39001,6 +39001,7 @@ function getDiscordPayload(inputs) {
       { name: '', value: '', inline: false },
       { name: 'Commit', value: payload.head_commit ? `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url})` : '-', inline: true },
       { name: 'Workflow', value: `[\`${workflow}#${runId}\`](${workflowURL})`, inline: true },
+      { name: '', value: '', inline: false },
     ];
 
     embed.fields = embed.fields ? [...baseFields, ...embed.fields, ] : baseFields;

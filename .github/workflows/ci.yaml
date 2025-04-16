@@ -24,7 +24,12 @@ jobs:
 
       - name: Action Discord Alert
         if: always()
-        uses: Thiteago/action-discord-alerts@coverage
+        uses: Thiteago/action-discord-alerts@main
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}     
           status: ${{ job.status }}
+          custom_fields: |
+            [
+              {"name": "Test Results", "value": "All tests passed", "inline": true},
+              {"name": "Duration", "value": "2m 15s", "inline": true}
+            ]

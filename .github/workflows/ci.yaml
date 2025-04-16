@@ -24,13 +24,7 @@ jobs:
 
       - name: Action Discord Alert
         if: always()
-        uses: Thiteago/action-discord-alerts@main
+        uses: ErnaneJ/action-discord-alerts@main
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}     
           status: ${{ job.status }}
-          hide_default_fields: 'commit'
-          custom_fields: |
-            [
-              {"name": "Test Results", "value": "All tests passed", "inline": true},
-              {"name": "Duration", "value": "2m 15s", "inline": true}
-            ]

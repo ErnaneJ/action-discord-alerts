@@ -39003,7 +39003,7 @@ function getDiscordPayload(inputs) {
       { name: 'Workflow', value: `[\`${workflow}#${runId}\`](${workflowURL})`, inline: true },
     ];
 
-    embed.fields = embed.fields ? [...embed.fields, ...baseFields] : baseFields;
+    embed.fields = embed.fields ? [...baseFields, ...embed.fields, ] : baseFields;
   }
 
   let discord_payload = { embeds: [embed] }

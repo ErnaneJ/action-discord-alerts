@@ -38998,17 +38998,14 @@ function getDiscordPayload(inputs) {
 
   if (inputs.event_info) {
       const baseFields = [];
-      const hiddenFields = inputs.hide_default_fields 
-        ? inputs.hide_default_fields.split(',').map(f => f.trim().toLowerCase())
-        : [];
+      const hiddenFields = inputs.hide_default_fields || []
+      console.log(hiddenFields)
   
-      // Only add spacing if we're showing any fields
-      if (!hiddenFields.includes('repo') || !hiddenFields.includes('branch') || 
-          !hiddenFields.includes('commit') || !hiddenFields.includes('workflow')) {
+      if (!hiddenFields.includes('repository') || !hiddenFields.includes('branch')) {
         baseFields.push({ name: '', value: '', inline: false });
       }
   
-      if (!hiddenFields.includes('repo')) {
+      if (!hiddenFields.includes('repository')) {
         baseFields.push({ 
           name: 'Repository', 
           value: `[\`${owner}/${repo}\`](${repoURL})`, 
@@ -39024,9 +39021,7 @@ function getDiscordPayload(inputs) {
         });
       }
   
-      // Add spacing if we're showing both repo and branch
-      if ((!hiddenFields.includes('repo') || !hiddenFields.includes('branch')) && 
-          (!hiddenFields.includes('commit') || !hiddenFields.includes('workflow'))) {
+      if (!hiddenFields.includes('commit') || !hiddenFields.includes('workflow')) {
         baseFields.push({ name: '', value: '', inline: false });
       }
   

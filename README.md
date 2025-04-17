@@ -57,6 +57,46 @@ Action aimed at facilitating continuous delivery. You only need a discord webhoo
 | **event_info**  |  `false`  | `true`                | Decide whether or not to display drill-downs for some information. By default it is shown.                                               |
 | **timestamp**   |  `false`  | `true`                | Controls whether to show the timestamp on the info card. Default pos is shown.                                                           |
 | **verbose**     |  `false`  | `false`               | Controls the sampling of some information when the script runs. For example, the payload that is assembled before being sent to discord. |
+| **custom_fields**     |  `false`  | -               | Make possible to specify any field do you want. |
+| **hide_default_fields**     |  `false`  | -               | Allows specifying custom fields. |
+
+## 🔧 Custom fields
+
+If you want to specify any custom fields on your action, you must follow the structure below on your ci:
+```yml
+  # ...
+  - name: Action Discord Alert
+    if: always()
+    uses: ErnaneJ/action-discord-alerts@main
+    with:
+      webhook: ${{ secrets.DISCORD_WEBHOOK }}     
+      status: ${{ job.status }}
+      custom_fields: |
+      [
+        {"name": "Test Results", "value": "All tests passed", "inline": true},
+        {"name": "Duration", "value": "2m 15s", "inline": true}
+      ]
+```
+and you will have a similiar result like this:
+
+<img alt="Preview" src="./imgs/custom_fields_preview.png">
+
+## 🔧 Hiding default fields
+
+If you don't want to show some of the default fields that our action deliveries, you must to define this on the following structure:
+```yml
+      - name: Action Discord Alert
+        if: always()
+        uses: ErnaneJ/action-discord-alerts@main
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}     
+          status: ${{ job.status }}
+          hide_default_fields: |
+            ['commit', 'repository']
+```
+
+the available fields to hide is `repository`, `commit`, `branch`, `workflow`.
+
 
 ## 💡 Test
 

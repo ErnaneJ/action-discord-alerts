@@ -46,8 +46,14 @@ inputs:
     description: "Controls the sampling of some information when the script runs. For example, the payload that is assembled before being sent to discord."
     required: false
     default: false
+  custom_fields:
+    description: "Make possible to specify any field do you want"
+    required: false
+  hide_default_fields:
+    description: "Allows specifying custom fields."
+    required: false
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
 
 branding:

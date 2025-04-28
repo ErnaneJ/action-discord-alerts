@@ -26,7 +26,8 @@ test('Inputs', () => {
     'description', 'image',
     'color',       'username',
     'avatar_url',  'event_info',
-    'timestamp',   'verbose'
+    'timestamp',   'verbose',
+    'custom_fields', 'hide_default_fields'
   ].forEach((input) => {
     expect(constants.INPUTS).toContain(input);
   });

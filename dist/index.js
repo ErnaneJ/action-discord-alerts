@@ -38965,7 +38965,7 @@ function getDiscordPayload(inputs) {
   }
 
   if(inputs.thumbnail){
-    embed.thumbnail = { url: inputs.image };
+    embed.thumbnail = { url: inputs.thumbnail };
   }else{
     embed.thumbnail = { url: DEFAULT_VALUES.thumbnail };
   }
@@ -38999,7 +38999,6 @@ function getDiscordPayload(inputs) {
   if (inputs.event_info) {
       const baseFields = [];
       const hiddenFields = inputs.hide_default_fields || []
-      console.log(hiddenFields)
   
       if (!hiddenFields.includes('repository') || !hiddenFields.includes('branch')) {
         baseFields.push({ name: '', value: '', inline: false });
@@ -39092,6 +39091,7 @@ async function sendPayload(webhook, payload) {
     }
   }
 }
+
 ;// CONCATENATED MODULE: ./index.js
 
 
